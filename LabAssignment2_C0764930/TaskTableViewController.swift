@@ -26,9 +26,8 @@ class TaskTableViewController: UITableViewController, UISearchBarDelegate, UISea
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        
-        searchBar.delegate = self
-        self.loadCoreData()
+        saveCoreData()
+        NotificationCenter.default.addObserver(self, selector: #selector(saveCoreData), name: UIApplication.willResignActiveNotification, object: nil)
        
      
     }
@@ -141,6 +140,35 @@ class TaskTableViewController: UITableViewController, UISearchBarDelegate, UISea
         }
 
         
+    @objc func saveCoreData(){
+        
+       // call clear core data
+        clearCoreData()
+        
+        //create an instance of app delegate
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+               
+                           // context
+                           let ManagedContext = appDelegate.persistentContainer.viewContext
+               
+                           for task in tasks!{
+                               let taskEntity = NSEntityDescription.insertNewObject(forEntityName: "TaskModel", into: ManagedContext)
+                              taskEntity.setValue(task.title, forKey: "title")
+                              taskEntity.setValue(task.days, forKey: "days")
+               
+                               print("\(task.days)")
+                               //save  context
+                               do{
+                                   try ManagedContext.save()
+                               }catch{
+                                   print(error)
+                               }
+               
+               
+                               print("days: \(task.days)")
+                           }
+        loadCoreData()
+    }
  
 
     // Override to support conditional editing of the table view.
