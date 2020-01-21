@@ -28,21 +28,29 @@
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="76"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LGI-gy-AuH">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LGI-gy-AuH">
                                             <rect key="frame" x="20" y="11" width="83" height="21"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Days" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kwj-Id-x9C">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Days" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kwj-Id-x9C">
                                             <rect key="frame" x="20" y="33" width="83" height="21"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="trailingMargin" secondItem="LGI-gy-AuH" secondAttribute="trailing" constant="291" id="Hhc-kM-gMh"/>
+                                        <constraint firstItem="Kwj-Id-x9C" firstAttribute="top" secondItem="LGI-gy-AuH" secondAttribute="bottom" constant="1" id="Nzc-na-zvy"/>
+                                        <constraint firstItem="LGI-gy-AuH" firstAttribute="top" secondItem="brG-Ph-4mg" secondAttribute="topMargin" id="S1B-s3-jgw"/>
+                                        <constraint firstItem="Kwj-Id-x9C" firstAttribute="leading" secondItem="brG-Ph-4mg" secondAttribute="leadingMargin" id="fXV-5A-TsV"/>
+                                        <constraint firstItem="Kwj-Id-x9C" firstAttribute="top" secondItem="LGI-gy-AuH" secondAttribute="bottom" constant="1" id="sZU-cO-3X6"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="Kwj-Id-x9C" secondAttribute="trailing" constant="291" id="sdf-a0-Zm2"/>
+                                        <constraint firstItem="LGI-gy-AuH" firstAttribute="leading" secondItem="brG-Ph-4mg" secondAttribute="leadingMargin" id="uuA-ng-hm6"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="Kwj-Id-x9C" secondAttribute="bottom" constant="11" id="wnW-hd-UCS"/>
+                                    </constraints>
                                 </tableViewCellContentView>
                             </tableViewCell>
                         </prototypes>
@@ -119,7 +127,13 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Kqi-FA-Axx"/>
                     </view>
-                    <navigationItem key="navigationItem" id="hDT-hm-7Uc"/>
+                    <navigationItem key="navigationItem" id="hDT-hm-7Uc">
+                        <barButtonItem key="rightBarButtonItem" title="Save" id="qZi-Uh-QYO">
+                            <connections>
+                                <action selector="saveButton:" destination="ETT-TW-Pw1" id="S8A-NC-4Tb"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outletCollection property="txtDetails" destination="a3d-or-rLw" collectionClass="NSMutableArray" id="1m7-4s-thz"/>
                         <outletCollection property="txtDetails" destination="KSf-QB-9ef" collectionClass="NSMutableArray" id="9GH-iK-elM"/>

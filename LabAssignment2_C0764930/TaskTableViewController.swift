@@ -51,13 +51,20 @@ class TaskTableViewController: UITableViewController, UISearchBarDelegate, UISea
                cell?.detailTextLabel?.text = "\(task.days) days + \(task.incrementer) completed days"
         
                 if tasks?[indexPath.row].incrementer == self.tasks?[indexPath.row].days{
-                    cell?.backgroundColor = UIColor.green
+                    cell?.backgroundColor = #colorLiteral(red: 0.1294117719, green: 0.2156862766, blue: 0.06666667014, alpha: 1)
                     cell?.textLabel?.text = "Completed"
                     cell?.detailTextLabel?.text = ""
                     
+                    
                 }
                return cell!
+        
     }
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 150
+    }
+    
+    
     
     override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
             let Addaction = UITableViewRowAction(style: .normal, title: "Add Day") { (rowaction, indexPath) in
@@ -108,7 +115,7 @@ class TaskTableViewController: UITableViewController, UISearchBarDelegate, UISea
                       // let taskItem = self.tasks![indexPath.row] as? NSManagedObject
                        let appDelegate = UIApplication.shared.delegate as! AppDelegate
                        let ManagedContext = appDelegate.persistentContainer.viewContext
-                       let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "TaskModel")
+                       let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "TaskEntity")
                 do{
                     let test = try ManagedContext.fetch(fetchRequest)
                     let item = test[indexPath.row] as!NSManagedObject
@@ -150,7 +157,7 @@ class TaskTableViewController: UITableViewController, UISearchBarDelegate, UISea
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
+            tableView.deleteRows(at: [indexPath], with: .left)
         } else if editingStyle == .insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
         }    
@@ -202,7 +209,7 @@ class TaskTableViewController: UITableViewController, UISearchBarDelegate, UISea
                 // context
                 let ManagedContext = appDelegate.persistentContainer.viewContext
          
-         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "TaskModel")
+         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "TaskEntity")
         
          do{
              let results = try ManagedContext.fetch(fetchRequest)
@@ -210,7 +217,7 @@ class TaskTableViewController: UITableViewController, UISearchBarDelegate, UISea
                  for result in results as! [NSManagedObject]{
                      let title = result.value(forKey:"title") as! String
 
-                     let days = result.value(forKey: "days") as! Int
+                     let days = result.value(forKey: "daysRequired") as! Int
 
 
                      tasks?.append(Task(title: title, days: days))
@@ -231,7 +238,7 @@ class TaskTableViewController: UITableViewController, UISearchBarDelegate, UISea
                // context
                let ManagedContext = appDelegate.persistentContainer.viewContext
         
-        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "TaskModel")
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "TaskEntity")
         
         do{
             tasks = try ManagedContext.fetch(fetchRequest) as? [Task]
@@ -257,7 +264,7 @@ class TaskTableViewController: UITableViewController, UISearchBarDelegate, UISea
             predicate = NSPredicate(format: "title contains %@", "\(searchText)")
             let appDelegate = UIApplication.shared.delegate as! AppDelegate
             let ManagedContext = appDelegate.persistentContainer.viewContext
-            let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "TaskModel")
+            let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "TaskEntity")
             fetchRequest.predicate = predicate
             do{
                 tasks = try ManagedContext.fetch(fetchRequest) as? [Task]
@@ -270,7 +277,7 @@ class TaskTableViewController: UITableViewController, UISearchBarDelegate, UISea
             
             let appDelegate = UIApplication.shared.delegate as! AppDelegate
             let ManagedContext = appDelegate.persistentContainer.viewContext
-            let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "TaskModel")
+            let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "TaskEntity")
         
             do{
                 tasks = try ManagedContext.fetch(fetchRequest) as? [Task]

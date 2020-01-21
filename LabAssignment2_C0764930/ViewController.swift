@@ -31,6 +31,8 @@ class ViewController: UIViewController {
     }
 
         
+
+    
     @IBAction func saveButton(_ sender: Any) {
     
     let title = txtDetails[0].text ?? ""
@@ -57,9 +59,9 @@ class ViewController: UIViewController {
                            let ManagedContext = appDelegate.persistentContainer.viewContext
                
                            for task in tasks!{
-                               let taskEntity = NSEntityDescription.insertNewObject(forEntityName: "TaskModel", into: ManagedContext)
+                               let taskEntity = NSEntityDescription.insertNewObject(forEntityName: "TaskEntity", into: ManagedContext)
                               taskEntity.setValue(task.title, forKey: "title")
-                              taskEntity.setValue(task.days, forKey: "days")
+                              taskEntity.setValue(task.days, forKey: "daysRequired")
                
                                print("\(task.days)")
                                //save  context
@@ -83,7 +85,7 @@ class ViewController: UIViewController {
                 // context
                 let ManagedContext = appDelegate.persistentContainer.viewContext
          
-         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "TaskModel")
+         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "TaskEntity")
         
          do{
              let results = try ManagedContext.fetch(fetchRequest)
@@ -91,7 +93,7 @@ class ViewController: UIViewController {
                  for result in results as! [NSManagedObject]{
                      let title = result.value(forKey:"title") as! String
                   
-                     let days = result.value(forKey: "days") as! Int
+                     let days = result.value(forKey: "daysRequired") as! Int
                     
                      
                      tasks?.append(Task(title: title, days: days))
@@ -121,7 +123,7 @@ class ViewController: UIViewController {
      let ManagedContext = appDelegate.persistentContainer.viewContext
         
         //create fetch request
-          let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "TaskModel")
+          let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "TaskEntity")
         
         fetchRequest.returnsObjectsAsFaults = false
         do{
