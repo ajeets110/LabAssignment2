@@ -10,59 +10,55 @@ import CoreData
 
 class TaskTableViewController: UITableViewController, UISearchBarDelegate, UISearchDisplayDelegate {
     
-    @IBOutlet weak var lblTitle: UILabel!
-    
-    @IBOutlet weak var lblNoOfDays: UILabel!
-    
-    @IBOutlet weak var lblDaysCompleted: UILabel!
     
     @IBOutlet weak var searchBar: UISearchBar!
     
     
     var tasks: [Task]?
     var items: [NSManagedObject] = []
-    var addDay = "0"
-
+    var add_Day = "0"
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        saveCoreData()
-        NotificationCenter.default.addObserver(self, selector: #selector(saveCoreData), name: UIApplication.willResignActiveNotification, object: nil)
-       
-     
+        
+        
+        searchBar.delegate = self
+        self.loadCoreData()
+        
     }
-    
-    
 
+    
     // MARK: - Table view data source
-
+    
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         return 1
     }
-
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         return tasks?.count ?? 0
     }
-
+    
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-               let task = tasks![indexPath.row]
+        let task = tasks![indexPath.row]
         let cell = tableView.dequeueReusableCell(withIdentifier: "tasksDisplayCell") as! TaskTableViewCell?
         cell?.cellTitle.text = task.title
         cell?.cellDays.text = "\(task.days) days"
         cell?.cellRemaining.text = "\(task.days-task.incrementer) days remaining"
-                if tasks?[indexPath.row].incrementer == self.tasks?[indexPath.row].days{
-                    cell?.backgroundColor = #colorLiteral(red: 0.1294117719, green: 0.2156862766, blue: 0.06666667014, alpha: 1)
-                    cell?.textLabel?.text = "Completed"
-                    cell?.detailTextLabel?.text = ""
-                    
-                }
-               return cell!
+        if tasks?[indexPath.row].incrementer == self.tasks?[indexPath.row].days{
+            cell?.backgroundColor = #colorLiteral(red: 0.1294117719, green: 0.2156862766, blue: 0.06666667014, alpha: 1)
+            cell?.textLabel?.text = "Completed"
+            cell?.detailTextLabel?.text = ""
+            
+        }
+        return cell!
+        saveCoreData()
         
     }
+    
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 100
     }
@@ -70,143 +66,85 @@ class TaskTableViewController: UITableViewController, UISearchBarDelegate, UISea
     
     
     override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
-            let Addaction = UITableViewRowAction(style: .normal, title: "Add Day") { (rowaction, indexPath) in
-                print("add day clicked")
-                let alertcontroller = UIAlertController(title: "Add Day", message: "Enter a day for this task", preferredStyle: .alert)
-                               
-                               alertcontroller.addTextField { (textField ) in
-                                               textField.placeholder = "number of days"
-                                self.addDay = textField.text!
-                                print(self.addDay)
-                                
-                                   textField.text = ""
-                                
-                               }
-                               let CancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-                               CancelAction.setValue(UIColor.brown, forKey: "titleTextColor")
-                               let AddItemAction = UIAlertAction(title: "Add Item", style: .default){
-                                   (action) in
-                                let count = alertcontroller.textFields?.first?.text
-                                self.tasks?[indexPath.row].incrementer += Int(count!) ?? 0
-                                
-                                if self.tasks?[indexPath.row].incrementer == self.tasks?[indexPath.row].days{
-                                    
-                                    print("equal")
-//
-                                    }
-                     
-                                self.tableView.reloadData()
-                                
-                    }
-                        AddItemAction.setValue(UIColor.black, forKey: "titleTextColor")
-                                             alertcontroller.addAction(CancelAction)
-                                             alertcontroller.addAction(AddItemAction)
-                                             self.present(alertcontroller, animated: true, completion: nil)
-            }
-            Addaction.backgroundColor = UIColor.blue
+        let Addaction = UITableViewRowAction(style: .normal, title: "Add Day") { (rowaction, indexPath) in
+            print("add day clicked")
+            let alertcontroller = UIAlertController(title: "Add Day", message: "Enter a day for this task", preferredStyle: .alert)
             
-    
-            let deleteaction = UITableViewRowAction(style: .normal, title: "Delete") { (rowaction, indexPath) in
+            alertcontroller.addTextField { (textField ) in
+                textField.placeholder = "number of days"
+                self.add_Day = textField.text!
+                print(self.add_Day)
                 
+                textField.text = ""
                 
-                      // let taskItem = self.tasks![indexPath.row] as? NSManagedObject
-                       let appDelegate = UIApplication.shared.delegate as! AppDelegate
-                       let ManagedContext = appDelegate.persistentContainer.viewContext
-                       let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "TaskEntity")
-                do{
-                    let test = try ManagedContext.fetch(fetchRequest)
-                    let item = test[indexPath.row] as!NSManagedObject
-                    self.tasks?.remove(at: indexPath.row)
-                    ManagedContext.delete(item)
-                    tableView.reloadData()
+            }
+            let CancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+            CancelAction.setValue(UIColor.brown, forKey: "titleTextColor")
+            let AddItemAction = UIAlertAction(title: "Add Item", style: .default){
+                (action) in
+                let count = alertcontroller.textFields?.first?.text
+                self.tasks?[indexPath.row].incrementer += Int(count!) ?? 0
+                
+                if self.tasks?[indexPath.row].incrementer == self.tasks?[indexPath.row].days{
                     
-                    do{
-                                try ManagedContext.save()
-                        }
-                
-                    catch{
-                                       print(error)
-                                   }
+                    print("equal")
+                    //
                 }
+                
+                self.tableView.reloadData()
+                
+            }
+            AddItemAction.setValue(UIColor.black, forKey: "titleTextColor")
+            alertcontroller.addAction(CancelAction)
+            alertcontroller.addAction(AddItemAction)
+            self.present(alertcontroller, animated: true, completion: nil)
+        }
+        Addaction.backgroundColor = UIColor.blue
+        
+        
+        let deletion = UITableViewRowAction(style: .normal, title: "Delete") { (rowaction, indexPath) in
+            
+            
+            // let taskItem = self.tasks![indexPath.row] as? NSManagedObject
+            let appDelegate = UIApplication.shared.delegate as! AppDelegate
+            let ManagedContext = appDelegate.persistentContainer.viewContext
+            let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "TaskEntity")
+            do{
+                let test = try ManagedContext.fetch(fetchRequest)
+                let item = test[indexPath.row] as!NSManagedObject
+                self.tasks?.remove(at: indexPath.row)
+                ManagedContext.delete(item)
+                tableView.reloadData()
+                
+                do{
+                    try ManagedContext.save()
+                }
+                    
                 catch{
                     print(error)
                 }
-                       
-                    
-
             }
-                   deleteaction.backgroundColor = UIColor.red
-                   return [Addaction,deleteaction]
+            catch{
+                print(error)
+            }
+            
+            
+            
         }
-
-        
-    @objc func saveCoreData(){
-        
-       // call clear core data
-        clearCoreData()
-        
-        //create an instance of app delegate
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-               
-                           // context
-                           let ManagedContext = appDelegate.persistentContainer.viewContext
-               
-                           for task in tasks!{
-                               let taskEntity = NSEntityDescription.insertNewObject(forEntityName: "TaskModel", into: ManagedContext)
-                              taskEntity.setValue(task.title, forKey: "title")
-                              taskEntity.setValue(task.days, forKey: "days")
-               
-                               print("\(task.days)")
-                               //save  context
-                               do{
-                                   try ManagedContext.save()
-                               }catch{
-                                   print(error)
-                               }
-               
-               
-                               print("days: \(task.days)")
-                           }
-        loadCoreData()
-    }
- 
-    func loadCoreData(){
-        tasks = [Task]()
-        
-                let appDelegate = UIApplication.shared.delegate as! AppDelegate
-                
-                let ManagedContext = appDelegate.persistentContainer.viewContext
-         
-         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "TaskModel")
-        
-         do{
-             let results = try ManagedContext.fetch(fetchRequest)
-             if results is [NSManagedObject]{
-                 for result in results as! [NSManagedObject]{
-                     let title = result.value(forKey:"title") as! String
-                  
-                     let days = result.value(forKey: "days") as! Int
-                    
-                     
-                     tasks?.append(Task(title: title, days: days))
-                    
-                 }
-             }
-         } catch{
-             print(error)
-         }
-         print(tasks!.count
-        )
+        deletion.backgroundColor = UIColor.red
+        return [Addaction,deletion]
     }
     
-
+    
+    
+    
     // Override to support conditional editing of the table view.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         // Return false if you do not want the specified item to be editable.
         return true
     }
     
-
+    
     
     // Override to support editing the table view.
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
@@ -218,31 +156,31 @@ class TaskTableViewController: UITableViewController, UISearchBarDelegate, UISea
         }    
     }
     
-
+    
     /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
-
+     // Override to support rearranging the table view.
+     override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
+     
+     }
+     */
+    
     /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
+     // Override to support conditional rearranging of the table view.
+     override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
+     // Return false if you do not want the item to be re-orderable.
+     return true
+     }
+     */
+    
     /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
+     // MARK: - Navigation
+     
+     // In a storyboard-based application, you will often want to do a little preparation before navigation
+     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+     // Get the new view controller using segue.destination.
+     // Pass the selected object to the new view controller.
+     }
+     */
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destination.
@@ -252,46 +190,71 @@ class TaskTableViewController: UITableViewController, UISearchBarDelegate, UISea
             detailView.taskTable = self
             detailView.tasks = tasks
             
-       }
-    
+        }
+        
+    }
+    @objc func saveCoreData(){
+
+        
+        //create an instance of app delegate
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        
+        // context
+        let ManagedContext = appDelegate.persistentContainer.viewContext
+        
+        for task in tasks!{
+            let taskEntity = NSEntityDescription.insertNewObject(forEntityName: "TaskEntity", into: ManagedContext)
+            taskEntity.setValue(task.title, forKey: "title")
+            taskEntity.setValue(task.days, forKey: "daysRequired")
+            
+            print("\(task.days)")
+            //save  context
+            do{
+                try ManagedContext.save()
+            }catch{
+                print(error)
+            }
+            
+            
+            print("days: \(task.days)")
+        }
+        loadCoreData()
     }
     
     func loadCoreData(){
         tasks = [Task]()
-         //create an instance of app delegate
-                let appDelegate = UIApplication.shared.delegate as! AppDelegate
-                
-                // context
-                let ManagedContext = appDelegate.persistentContainer.viewContext
-         
-         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "TaskEntity")
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
         
-         do{
-             let results = try ManagedContext.fetch(fetchRequest)
-             if results is [NSManagedObject]{
-                 for result in results as! [NSManagedObject]{
-                     let title = result.value(forKey:"title") as! String
-
-                     let days = result.value(forKey: "daysRequired") as! Int
-
-
-                     tasks?.append(Task(title: title, days: days))
-                     tableView.reloadData()
-                 }
-             }
-         } catch{
-             print(error)
-         }
-         print(tasks!.count )
+        let ManagedContext = appDelegate.persistentContainer.viewContext
+        
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "TaskEntity")
+        
+        do{
+            let results = try ManagedContext.fetch(fetchRequest)
+            if results is [NSManagedObject]{
+                for result in results as! [NSManagedObject]{
+                    let title = result.value(forKey:"title") as! String
+                    
+                    let days = result.value(forKey: "daysRequired") as! Int
+                    
+                    
+                    tasks?.append(Task(title: title, days: days))
+                    tableView.reloadData()
+                }
+            }
+        } catch{
+            print(error)
+        }
+        print(tasks!.count )
     }
     
     func LoadData(){
         
         //create an instance of app delegate
-               let appDelegate = UIApplication.shared.delegate as! AppDelegate
-               
-               // context
-               let ManagedContext = appDelegate.persistentContainer.viewContext
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        
+        // context
+        let ManagedContext = appDelegate.persistentContainer.viewContext
         
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "TaskEntity")
         
@@ -303,7 +266,7 @@ class TaskTableViewController: UITableViewController, UISearchBarDelegate, UISea
         {
             print("error")
         }
-
+        
     }
     
     func updateText(taskArray: [Task]){
@@ -311,7 +274,35 @@ class TaskTableViewController: UITableViewController, UISearchBarDelegate, UISea
         tableView.reloadData()
     }
     
-
+    func clearCoreData(){
+        
+        
+        //create an instance of app delegate
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        
+        // context
+        let ManagedContext = appDelegate.persistentContainer.viewContext
+        
+        //create fetch request
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "TaskEntity")
+        
+        fetchRequest.returnsObjectsAsFaults = false
+        do{
+            
+            let results = try ManagedContext.fetch(fetchRequest)
+            for managedObjects in results{
+                if let managedObjectsData = managedObjects as? NSManagedObject{
+                    
+                    ManagedContext.delete(managedObjectsData)
+                }
+            }
+        }
+        catch{
+            print(error)
+        }
+        
+    }
+    
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         if searchText != ""{
@@ -333,7 +324,7 @@ class TaskTableViewController: UITableViewController, UISearchBarDelegate, UISea
             let appDelegate = UIApplication.shared.delegate as! AppDelegate
             let ManagedContext = appDelegate.persistentContainer.viewContext
             let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "TaskEntity")
-        
+            
             do{
                 tasks = try ManagedContext.fetch(fetchRequest) as? [Task]
             }
@@ -344,12 +335,12 @@ class TaskTableViewController: UITableViewController, UISearchBarDelegate, UISea
         }
         tableView.reloadData()
     }
-
-   
+    
+    
     @IBAction func sortByName(_ sender: Any) {
         let itemSort = self.tasks!
-                   self.tasks! = itemSort.sorted { $0.title < $1.title }
-                      self.tableView.reloadData()
+        self.tasks! = itemSort.sorted { $0.title < $1.title }
+        self.tableView.reloadData()
     }
     
     
