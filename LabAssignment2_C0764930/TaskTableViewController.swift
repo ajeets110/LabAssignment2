@@ -170,6 +170,35 @@ class TaskTableViewController: UITableViewController, UISearchBarDelegate, UISea
         loadCoreData()
     }
  
+    func loadCoreData(){
+        tasks = [Task]()
+        
+                let appDelegate = UIApplication.shared.delegate as! AppDelegate
+                
+                let ManagedContext = appDelegate.persistentContainer.viewContext
+         
+         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "TaskModel")
+        
+         do{
+             let results = try ManagedContext.fetch(fetchRequest)
+             if results is [NSManagedObject]{
+                 for result in results as! [NSManagedObject]{
+                     let title = result.value(forKey:"title") as! String
+                  
+                     let days = result.value(forKey: "days") as! Int
+                    
+                     
+                     tasks?.append(Task(title: title, days: days))
+                    
+                 }
+             }
+         } catch{
+             print(error)
+         }
+         print(tasks!.count
+        )
+    }
+    
 
     // Override to support conditional editing of the table view.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
