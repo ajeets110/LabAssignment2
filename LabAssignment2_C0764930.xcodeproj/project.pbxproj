@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9B77054123D7B7090083DA5A /* TaskTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B77054023D7B7090083DA5A /* TaskTableViewCell.swift */; };
 		9B93595B23D7983900A01A3E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B93595A23D7983900A01A3E /* AppDelegate.swift */; };
 		9B93595D23D7983900A01A3E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B93595C23D7983900A01A3E /* SceneDelegate.swift */; };
 		9B93595F23D7983900A01A3E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B93595E23D7983900A01A3E /* ViewController.swift */; };
@@ -19,6 +20,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		9B77054023D7B7090083DA5A /* TaskTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskTableViewCell.swift; sourceTree = "<group>"; };
 		9B93595723D7983900A01A3E /* LabAssignment2_C0764930.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LabAssignment2_C0764930.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9B93595A23D7983900A01A3E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9B93595C23D7983900A01A3E /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -72,6 +74,7 @@
 				9B93596B23D7983A00A01A3E /* Info.plist */,
 				9B93596323D7983900A01A3E /* LabAssignment2_C0764930.xcdatamodeld */,
 				9B93597323D79DC900A01A3E /* TaskTableViewController.swift */,
+				9B77054023D7B7090083DA5A /* TaskTableViewCell.swift */,
 			);
 			path = LabAssignment2_C0764930;
 			sourceTree = "<group>";
@@ -147,6 +150,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9B77054123D7B7090083DA5A /* TaskTableViewCell.swift in Sources */,
 				9B93597423D79DC900A01A3E /* TaskTableViewController.swift in Sources */,
 				9B93595F23D7983900A01A3E /* ViewController.swift in Sources */,
 				9B93596523D7983900A01A3E /* LabAssignment2_C0764930.xcdatamodeld in Sources */,

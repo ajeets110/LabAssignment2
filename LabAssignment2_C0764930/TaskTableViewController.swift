@@ -10,7 +10,11 @@ import CoreData
 
 class TaskTableViewController: UITableViewController, UISearchBarDelegate, UISearchDisplayDelegate {
     
-
+    @IBOutlet weak var lblTitle: UILabel!
+    
+    @IBOutlet weak var lblNoOfDays: UILabel!
+    
+    @IBOutlet weak var lblDaysCompleted: UILabel!
     
     @IBOutlet weak var searchBar: UISearchBar!
     
@@ -22,6 +26,7 @@ class TaskTableViewController: UITableViewController, UISearchBarDelegate, UISea
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        
         searchBar.delegate = self
         self.loadCoreData()
        
@@ -46,22 +51,21 @@ class TaskTableViewController: UITableViewController, UISearchBarDelegate, UISea
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
                let task = tasks![indexPath.row]
-               let cell = tableView.dequeueReusableCell(withIdentifier: "taskCell")
-               cell?.textLabel?.text = task.title
-               cell?.detailTextLabel?.text = "\(task.days) days + \(task.incrementer) completed days"
-        
+        let cell = tableView.dequeueReusableCell(withIdentifier: "tasksDisplayCell") as! TaskTableViewCell?
+        cell?.cellTitle.text = task.title
+        cell?.cellDays.text = "\(task.days) days"
+        cell?.cellRemaining.text = "\(task.days-task.incrementer) days remaining"
                 if tasks?[indexPath.row].incrementer == self.tasks?[indexPath.row].days{
                     cell?.backgroundColor = #colorLiteral(red: 0.1294117719, green: 0.2156862766, blue: 0.06666667014, alpha: 1)
                     cell?.textLabel?.text = "Completed"
                     cell?.detailTextLabel?.text = ""
-                    
                     
                 }
                return cell!
         
     }
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 150
+        return 100
     }
     
     
@@ -90,16 +94,10 @@ class TaskTableViewController: UITableViewController, UISearchBarDelegate, UISea
                                     
                                     print("equal")
 //
-                                               
-                                            
-
                                     }
-                                    
-                                
-                            
+                     
                                 self.tableView.reloadData()
                                 
-                        
                     }
                         AddItemAction.setValue(UIColor.black, forKey: "titleTextColor")
                                              alertcontroller.addAction(CancelAction)

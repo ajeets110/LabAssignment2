@@ -21,37 +21,41 @@
                             <textInputTraits key="textInputTraits"/>
                         </searchBar>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="taskCell" rowHeight="76" id="pZi-6d-6i7">
-                                <rect key="frame" x="0.0" y="72" width="414" height="76"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="tasksDisplayCell" rowHeight="95" id="0Lc-tj-3Ld" customClass="TaskTableViewCell" customModule="LabAssignment2_C0764930" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="72" width="414" height="95"/>
                                 <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="pZi-6d-6i7" id="brG-Ph-4mg">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="76"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="0Lc-tj-3Ld" id="I0l-mX-sia">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="95"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LGI-gy-AuH">
-                                            <rect key="frame" x="20" y="11" width="83" height="21"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qli-1s-ePI">
+                                            <rect key="frame" x="20" y="11" width="237" height="21"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Days" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kwj-Id-x9C">
-                                            <rect key="frame" x="20" y="33" width="83" height="21"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Number of days" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="r7p-UX-L5h">
+                                            <rect key="frame" x="20" y="40" width="237" height="16"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Days Remaining" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TX6-eY-F81">
+                                            <rect key="frame" x="20" y="64" width="237" height="16"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
-                                    <constraints>
-                                        <constraint firstAttribute="trailingMargin" secondItem="LGI-gy-AuH" secondAttribute="trailing" constant="291" id="Hhc-kM-gMh"/>
-                                        <constraint firstItem="Kwj-Id-x9C" firstAttribute="top" secondItem="LGI-gy-AuH" secondAttribute="bottom" constant="1" id="Nzc-na-zvy"/>
-                                        <constraint firstItem="LGI-gy-AuH" firstAttribute="top" secondItem="brG-Ph-4mg" secondAttribute="topMargin" id="S1B-s3-jgw"/>
-                                        <constraint firstItem="Kwj-Id-x9C" firstAttribute="leading" secondItem="brG-Ph-4mg" secondAttribute="leadingMargin" id="fXV-5A-TsV"/>
-                                        <constraint firstItem="Kwj-Id-x9C" firstAttribute="top" secondItem="LGI-gy-AuH" secondAttribute="bottom" constant="1" id="sZU-cO-3X6"/>
-                                        <constraint firstAttribute="trailingMargin" secondItem="Kwj-Id-x9C" secondAttribute="trailing" constant="291" id="sdf-a0-Zm2"/>
-                                        <constraint firstItem="LGI-gy-AuH" firstAttribute="leading" secondItem="brG-Ph-4mg" secondAttribute="leadingMargin" id="uuA-ng-hm6"/>
-                                        <constraint firstAttribute="bottomMargin" secondItem="Kwj-Id-x9C" secondAttribute="bottom" constant="11" id="wnW-hd-UCS"/>
-                                    </constraints>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="cellDays" destination="r7p-UX-L5h" id="bzs-Gu-Pnw"/>
+                                    <outlet property="cellRemaining" destination="TX6-eY-F81" id="hja-kb-cvS"/>
+                                    <outlet property="cellTitle" destination="Qli-1s-ePI" id="f9V-SQ-62d"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -62,13 +66,13 @@
                     <navigationItem key="navigationItem" id="YUV-pd-thL">
                         <leftBarButtonItems>
                             <barButtonItem title="Sort by Date" id="Wyb-f7-dXv"/>
-                            <barButtonItem title="Sort by name" id="oNr-L5-vtW">
+                            <barButtonItem title="Name" id="oNr-L5-vtW">
                                 <connections>
                                     <action selector="sortByName:" destination="BYZ-38-t0r" id="9sg-85-OeF"/>
                                 </connections>
                             </barButtonItem>
                         </leftBarButtonItems>
-                        <barButtonItem key="rightBarButtonItem" title="Item" image="plus.app" catalog="system" id="ev9-Oe-012">
+                        <barButtonItem key="rightBarButtonItem" title="Item" image="plus" catalog="system" id="ev9-Oe-012">
                             <connections>
                                 <segue destination="ETT-TW-Pw1" kind="show" id="Q3g-ny-U6a"/>
                             </connections>
@@ -90,40 +94,50 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="m0i-Ae-5Kg">
-                                <rect key="frame" x="0.0" y="238" width="110.5" height="51"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="28" translatesAutoresizingMaskIntoConstraints="NO" id="UnK-EX-XzO">
+                                <rect key="frame" x="79" y="406" width="256" height="85"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aJk-b7-J29">
-                                        <rect key="frame" x="0.0" y="0.0" width="33.5" height="20.5"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Days Required" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hw6-uC-4LU">
-                                        <rect key="frame" x="0.0" y="30.5" width="110.5" height="20.5"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="top" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="m0i-Ae-5Kg">
+                                        <rect key="frame" x="0.0" y="0.0" width="256" height="23"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aJk-b7-J29">
+                                                <rect key="frame" x="0.0" y="0.0" width="123" height="23"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Days Required" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hw6-uC-4LU">
+                                                <rect key="frame" x="133" y="0.0" width="123" height="23"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="33" translatesAutoresizingMaskIntoConstraints="NO" id="LmI-G0-bK0">
+                                        <rect key="frame" x="0.0" y="51" width="229" height="34"/>
+                                        <subviews>
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter Title" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="a3d-or-rLw">
+                                                <rect key="frame" x="0.0" y="0.0" width="98" height="34"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits"/>
+                                            </textField>
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter Days" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="KSf-QB-9ef">
+                                                <rect key="frame" x="131" y="0.0" width="98" height="34"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits"/>
+                                            </textField>
+                                        </subviews>
+                                    </stackView>
                                 </subviews>
                             </stackView>
-                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="enter title" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="a3d-or-rLw">
-                                <rect key="frame" x="155" y="225" width="239" height="34"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
-                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="enter days" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="KSf-QB-9ef">
-                                <rect key="frame" x="155" y="267" width="239" height="34"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="m0i-Ae-5Kg" firstAttribute="leading" secondItem="Kqi-FA-Axx" secondAttribute="leading" id="Iub-hT-GAa"/>
-                            <constraint firstItem="m0i-Ae-5Kg" firstAttribute="top" secondItem="Kqi-FA-Axx" secondAttribute="top" constant="150" id="Z8h-5K-7Rr"/>
+                            <constraint firstItem="Kqi-FA-Axx" firstAttribute="trailing" secondItem="UnK-EX-XzO" secondAttribute="trailing" constant="79" id="1b6-bc-91A"/>
+                            <constraint firstItem="UnK-EX-XzO" firstAttribute="leading" secondItem="Kqi-FA-Axx" secondAttribute="leading" constant="79" id="6v4-2t-0XD"/>
+                            <constraint firstItem="UnK-EX-XzO" firstAttribute="top" secondItem="Kqi-FA-Axx" secondAttribute="top" constant="318" id="PMX-Tx-4bw"/>
+                            <constraint firstItem="Kqi-FA-Axx" firstAttribute="bottom" secondItem="UnK-EX-XzO" secondAttribute="bottom" constant="371" id="gMx-wA-Naz"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Kqi-FA-Axx"/>
                     </view>
@@ -163,6 +177,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="plus.app" catalog="system" width="64" height="56"/>
+        <image name="plus" catalog="system" width="64" height="56"/>
     </resources>
 </document>
