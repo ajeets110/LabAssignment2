@@ -22,13 +22,20 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-    
-        saveCoreData()
+        loadCoreData()
         NotificationCenter.default.addObserver(self, selector: #selector(saveCoreData), name: UIApplication.willResignActiveNotification, object: nil)
-        
+    
     }
-
-        
+    
+    func getFilePath() -> String {
+        let documentPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)
+        if documentPath.count > 0 {
+            let documentDirectory = documentPath[0]
+            let filePath = documentDirectory.appending("/task.txt")
+            return filePath
+        }
+        return ""
+    }
 
     
     @IBAction func saveButton(_ sender: Any) {
@@ -39,10 +46,12 @@ class ViewController: UIViewController {
                 
         let task = Task(title: title, days: days)
         tasks?.append(task)
+         saveCoreData()
                    for textField in txtDetails {
                        textField.text = ""
                        textField.resignFirstResponder()
                    }
+       
     }
     
     @objc func saveCoreData(){
@@ -61,8 +70,6 @@ class ViewController: UIViewController {
             taskEntity.setValue(task.title, forKey: "title")
             taskEntity.setValue(task.days, forKey: "daysRequired")
             
-            print("\(task.days)")
-            //save  context
             do{
                 try ManagedContext.save()
             }catch{
@@ -72,8 +79,10 @@ class ViewController: UIViewController {
             
             print("days: \(task.days)")
         }
+        
         loadCoreData()
     }
+   
     
     func loadCoreData(){
         tasks = [Task]()
@@ -104,12 +113,12 @@ class ViewController: UIViewController {
         print(tasks!.count )
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
-        
-        taskTable?.updateText(taskArray: tasks!)
-        //taskTable?.updateTask(task: task1!)
-        
-    }
+//    override func viewWillDisappear(_ animated: Bool) {
+//
+//        tasks?.updateText(taskArray: tasks!)
+//        //taskTable?.updateTask(task: task1!)
+//
+//    }
     
     func clearCoreData(){
         

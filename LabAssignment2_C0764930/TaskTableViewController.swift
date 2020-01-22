@@ -13,20 +13,28 @@ class TaskTableViewController: UITableViewController, UISearchBarDelegate, UISea
     
     @IBOutlet weak var searchBar: UISearchBar!
     
-    
+    // Variable Declaration
     var tasks: [Task]?
     var items: [NSManagedObject] = []
     var add_Day = "0"
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
         searchBar.delegate = self
+        
+        // calling load core data
         self.loadCoreData()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        
+        tasks?.removeAll()
+        self.loadCoreData()
+        tableView.reloadData()
         
     }
-
     
     // MARK: - Table view data source
     
@@ -55,7 +63,6 @@ class TaskTableViewController: UITableViewController, UISearchBarDelegate, UISea
             
         }
         return cell!
-        saveCoreData()
         
     }
     
@@ -182,126 +189,7 @@ class TaskTableViewController: UITableViewController, UISearchBarDelegate, UISea
      }
      */
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-        
-        if let detailView = segue.destination as? ViewController{
-            detailView.taskTable = self
-            detailView.tasks = tasks
-            
-        }
-        
-    }
-    @objc func saveCoreData(){
-
-        
-        //create an instance of app delegate
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        
-        // context
-        let ManagedContext = appDelegate.persistentContainer.viewContext
-        
-        for task in tasks!{
-            let taskEntity = NSEntityDescription.insertNewObject(forEntityName: "TaskEntity", into: ManagedContext)
-            taskEntity.setValue(task.title, forKey: "title")
-            taskEntity.setValue(task.days, forKey: "daysRequired")
-            
-            print("\(task.days)")
-            //save  context
-            do{
-                try ManagedContext.save()
-            }catch{
-                print(error)
-            }
-            
-            
-            print("days: \(task.days)")
-        }
-        loadCoreData()
-    }
     
-    func loadCoreData(){
-        tasks = [Task]()
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        
-        let ManagedContext = appDelegate.persistentContainer.viewContext
-        
-        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "TaskEntity")
-        
-        do{
-            let results = try ManagedContext.fetch(fetchRequest)
-            if results is [NSManagedObject]{
-                for result in results as! [NSManagedObject]{
-                    let title = result.value(forKey:"title") as! String
-                    
-                    let days = result.value(forKey: "daysRequired") as! Int
-                    
-                    
-                    tasks?.append(Task(title: title, days: days))
-                    tableView.reloadData()
-                }
-            }
-        } catch{
-            print(error)
-        }
-        print(tasks!.count )
-    }
-    
-    func LoadData(){
-        
-        //create an instance of app delegate
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        
-        // context
-        let ManagedContext = appDelegate.persistentContainer.viewContext
-        
-        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "TaskEntity")
-        
-        do{
-            tasks = try ManagedContext.fetch(fetchRequest) as? [Task]
-            self.tableView.reloadData()
-            
-        }catch
-        {
-            print("error")
-        }
-        
-    }
-    
-    func updateText(taskArray: [Task]){
-        tasks = taskArray
-        tableView.reloadData()
-    }
-    
-    func clearCoreData(){
-        
-        
-        //create an instance of app delegate
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        
-        // context
-        let ManagedContext = appDelegate.persistentContainer.viewContext
-        
-        //create fetch request
-        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "TaskEntity")
-        
-        fetchRequest.returnsObjectsAsFaults = false
-        do{
-            
-            let results = try ManagedContext.fetch(fetchRequest)
-            for managedObjects in results{
-                if let managedObjectsData = managedObjects as? NSManagedObject{
-                    
-                    ManagedContext.delete(managedObjectsData)
-                }
-            }
-        }
-        catch{
-            print(error)
-        }
-        
-    }
     
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
@@ -341,6 +229,40 @@ class TaskTableViewController: UITableViewController, UISearchBarDelegate, UISea
         let itemSort = self.tasks!
         self.tasks! = itemSort.sorted { $0.title < $1.title }
         self.tableView.reloadData()
+    }
+    
+    func loadCoreData(){
+        tasks = [Task]()
+        //create an instance of app delegate
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        
+        // context
+        let ManagedContext = appDelegate.persistentContainer.viewContext
+        
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "TaskEntity")
+        
+        do{
+            let results = try ManagedContext.fetch(fetchRequest)
+            if results is [NSManagedObject]{
+                for result in results as! [NSManagedObject]{
+                    let title = result.value(forKey:"title") as! String
+                    
+                    let days = result.value(forKey: "daysRequired") as! Int
+                    
+                    
+                    tasks?.append(Task(title: title, days: days))
+                    //tableView.reloadData()
+                }
+            }
+        } catch{
+            print(error)
+        }
+        print(tasks!.count )
+    }
+    
+    func updateText(taskArray: [Task]){
+        tasks = taskArray
+        tableView.reloadData()
     }
     
     
