@@ -12,7 +12,7 @@
 		9B93595D23D7983900A01A3E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B93595C23D7983900A01A3E /* SceneDelegate.swift */; };
 		9B93595F23D7983900A01A3E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B93595E23D7983900A01A3E /* ViewController.swift */; };
 		9B93596223D7983900A01A3E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9B93596023D7983900A01A3E /* Main.storyboard */; };
-		9B93596523D7983900A01A3E /* LabAssignment2_C0764930.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9B93596323D7983900A01A3E /* LabAssignment2_C0764930.xcdatamodeld */; };
+		9B93596523D7983900A01A3E /* LabAssignment2_C076441.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9B93596323D7983900A01A3E /* LabAssignment2_C076441.xcdatamodeld */; };
 		9B93596723D7983A00A01A3E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9B93596623D7983A00A01A3E /* Assets.xcassets */; };
 		9B93596A23D7983A00A01A3E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9B93596823D7983A00A01A3E /* LaunchScreen.storyboard */; };
 		9B93597223D79D9300A01A3E /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B93597123D79D9300A01A3E /* Task.swift */; };
@@ -48,7 +48,7 @@
 		9B93594E23D7983900A01A3E = {
 			isa = PBXGroup;
 			children = (
-				9B93595923D7983900A01A3E /* LabAssignment2_C0764930 */,
+				9B93595923D7983900A01A3E /* LabAssignment2_C0763441 */,
 				9B93595823D7983900A01A3E /* Products */,
 			);
 			sourceTree = "<group>";
@@ -61,7 +61,7 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		9B93595923D7983900A01A3E /* LabAssignment2_C0764930 */ = {
+		9B93595923D7983900A01A3E /* LabAssignment2_C0763441 */ = {
 			isa = PBXGroup;
 			children = (
 				9B93595A23D7983900A01A3E /* AppDelegate.swift */,
@@ -72,11 +72,11 @@
 				9B93597123D79D9300A01A3E /* Task.swift */,
 				9B93596823D7983A00A01A3E /* LaunchScreen.storyboard */,
 				9B93596B23D7983A00A01A3E /* Info.plist */,
-				9B93596323D7983900A01A3E /* LabAssignment2_C0764930.xcdatamodeld */,
+				9B93596323D7983900A01A3E /* LabAssignment2_C076441.xcdatamodeld */,
 				9B93597323D79DC900A01A3E /* TaskTableViewController.swift */,
 				9B77054023D7B7090083DA5A /* TaskTableViewCell.swift */,
 			);
-			path = LabAssignment2_C0764930;
+			path = LabAssignment2_C0763441;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -114,7 +114,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 9B93595223D7983900A01A3E /* Build configuration list for PBXProject "LabAssignment2_C0764930" */;
+			buildConfigurationList = 9B93595223D7983900A01A3E /* Build configuration list for PBXProject "LabAssignment2_C0763441" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -153,7 +153,7 @@
 				9B77054123D7B7090083DA5A /* TaskTableViewCell.swift in Sources */,
 				9B93597423D79DC900A01A3E /* TaskTableViewController.swift in Sources */,
 				9B93595F23D7983900A01A3E /* ViewController.swift in Sources */,
-				9B93596523D7983900A01A3E /* LabAssignment2_C0764930.xcdatamodeld in Sources */,
+				9B93596523D7983900A01A3E /* LabAssignment2_C076441.xcdatamodeld in Sources */,
 				9B93597223D79D9300A01A3E /* Task.swift in Sources */,
 				9B93595B23D7983900A01A3E /* AppDelegate.swift in Sources */,
 				9B93595D23D7983900A01A3E /* SceneDelegate.swift in Sources */,
@@ -333,7 +333,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		9B93595223D7983900A01A3E /* Build configuration list for PBXProject "LabAssignment2_C0764930" */ = {
+		9B93595223D7983900A01A3E /* Build configuration list for PBXProject "LabAssignment2_C0763441" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				9B93596C23D7983A00A01A3E /* Debug */,
@@ -354,13 +354,13 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		9B93596323D7983900A01A3E /* LabAssignment2_C0764930.xcdatamodeld */ = {
+		9B93596323D7983900A01A3E /* LabAssignment2_C076441.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
 				9B93596423D7983900A01A3E /* LabAssignment2_C0764930.xcdatamodel */,
 			);
 			currentVersion = 9B93596423D7983900A01A3E /* LabAssignment2_C0764930.xcdatamodel */;
-			path = LabAssignment2_C0764930.xcdatamodeld;
+			path = LabAssignment2_C076441.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};

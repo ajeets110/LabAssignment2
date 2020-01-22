@@ -17,7 +17,7 @@ class TaskTableViewController: UITableViewController, UISearchBarDelegate, UISea
     var tasks: [Task]?
     var items: [NSManagedObject] = []
     var add_Day = "0"
-    
+    let obj = ViewController()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -54,12 +54,11 @@ class TaskTableViewController: UITableViewController, UISearchBarDelegate, UISea
         let task = tasks![indexPath.row]
         let cell = tableView.dequeueReusableCell(withIdentifier: "tasksDisplayCell") as! TaskTableViewCell?
         cell?.cellTitle.text = task.title
-        cell?.cellDays.text = "\(task.days) days"
-        cell?.cellRemaining.text = "\(task.days-task.incrementer) days remaining"
+        cell?.cellDays.text = "Remaining : \(task.incrementer) days of \(task.days) days"
+        cell?.cellRemaining.text = ""
         if tasks?[indexPath.row].incrementer == self.tasks?[indexPath.row].days{
-            cell?.backgroundColor = #colorLiteral(red: 0.1294117719, green: 0.2156862766, blue: 0.06666667014, alpha: 1)
-            cell?.textLabel?.text = "Completed"
-            cell?.detailTextLabel?.text = ""
+            cell?.backgroundColor = .green
+            cell?.cellRemaining.text = "Completed"
             
         }
         return cell!
@@ -73,30 +72,24 @@ class TaskTableViewController: UITableViewController, UISearchBarDelegate, UISea
     
     
     override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
-        let Addaction = UITableViewRowAction(style: .normal, title: "Add Day") { (rowaction, indexPath) in
+        let Add = UITableViewRowAction(style: .normal, title: "Add Day") { (rowaction, indexPath) in
             print("add day clicked")
             let alertcontroller = UIAlertController(title: "Add Day", message: "Enter a day for this task", preferredStyle: .alert)
             
             alertcontroller.addTextField { (textField ) in
                 textField.placeholder = "number of days"
-                self.add_Day = textField.text!
-                print(self.add_Day)
-                
+                self.add_Day = textField.text!                
                 textField.text = ""
                 
             }
             let CancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
             CancelAction.setValue(UIColor.brown, forKey: "titleTextColor")
+            
             let AddItemAction = UIAlertAction(title: "Add Item", style: .default){
                 (action) in
                 let count = alertcontroller.textFields?.first?.text
-                self.tasks?[indexPath.row].incrementer += Int(count!) ?? 0
                 
-                if self.tasks?[indexPath.row].incrementer == self.tasks?[indexPath.row].days{
-                    
-                    print("equal")
-                    //
-                }
+                self.tasks?[indexPath.row].incrementer += Int(count!) ?? 0
                 
                 self.tableView.reloadData()
                 
@@ -106,7 +99,7 @@ class TaskTableViewController: UITableViewController, UISearchBarDelegate, UISea
             alertcontroller.addAction(AddItemAction)
             self.present(alertcontroller, animated: true, completion: nil)
         }
-        Addaction.backgroundColor = UIColor.blue
+        Add.backgroundColor = UIColor.blue
         
         
         let deletion = UITableViewRowAction(style: .normal, title: "Delete") { (rowaction, indexPath) in
@@ -139,7 +132,7 @@ class TaskTableViewController: UITableViewController, UISearchBarDelegate, UISea
             
         }
         deletion.backgroundColor = UIColor.red
-        return [Addaction,deletion]
+        return [Add,deletion]
     }
     
     
@@ -257,7 +250,7 @@ class TaskTableViewController: UITableViewController, UISearchBarDelegate, UISea
         } catch{
             print(error)
         }
-        print(tasks!.count )
+        
     }
     
     func updateText(taskArray: [Task]){

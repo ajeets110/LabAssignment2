@@ -27,6 +27,10 @@ class ViewController: UIViewController {
     
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        saveCoreData()
+    }
+    
     func getFilePath() -> String {
         let documentPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)
         if documentPath.count > 0 {
@@ -39,19 +43,18 @@ class ViewController: UIViewController {
 
     
     @IBAction func saveButton(_ sender: Any) {
-    
-    let title = txtDetails[0].text ?? ""
+        
+        let title = txtDetails[0].text ?? ""
         let days = Int(txtDetails[1].text ?? "0") ?? 0
-                   
-                
+        
         let task = Task(title: title, days: days)
         tasks?.append(task)
-         saveCoreData()
-                   for textField in txtDetails {
-                       textField.text = ""
-                       textField.resignFirstResponder()
-                   }
-       
+        saveCoreData()
+        for textField in txtDetails {
+            textField.text = ""
+            textField.resignFirstResponder()
+        }
+        
     }
     
     @objc func saveCoreData(){
@@ -75,9 +78,7 @@ class ViewController: UIViewController {
             }catch{
                 print(error)
             }
-            
-            
-            print("days: \(task.days)")
+    
         }
         
         loadCoreData()
